@@ -39,6 +39,7 @@ function onMouseUp(event){
 }
 function cancelPainting(event){
     isPainting = false;
+    ctx.beginPath();
 }
 function onLineWidthChange(event){
     ctx.lineWidth = event.target.value;
