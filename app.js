@@ -7,6 +7,7 @@ const ctx = canvas.getContext("2d");
 const destroyBtn = document.getElementById("destroy-btn");
 const eraseBtn = document.getElementById("eraser-btn");
 const textInput = document.getElementById("text");
+const saveBtn = document.getElementById("save");
 
 const fileInput = document.getElementById("file");
 canvas.width = 800;
@@ -86,12 +87,21 @@ function onFileChange(event){
     }
 }
 function onDoubleClick(event){
-    ctx.save();
-    const text = textInput.value;
-    ctx.lineWidth = 1;
-    ctx.font = "48px 'Press Start 2P'";
-    ctx.strokeText(text, event.offsetX, event.offsetY);
-    ctx.restore();
+    if (text !== "") {
+        ctx.save();
+        const text = textInput.value;
+        ctx.lineWidth = 1;
+        ctx.font = "48px 'Press Start 2P'";
+        ctx.strokeText(text, event.offsetX, event.offsetY);
+        ctx.restore();
+    }
+}
+function onSaveClick(event){
+    const url = canvas.toDataURL();
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "myDrawing.png"
+    a.click();
 }
 
 
@@ -110,3 +120,4 @@ modeBtn.addEventListener("click", onModeClick)
 destroyBtn.addEventListener("click", onDestroyClick);
 eraseBtn.addEventListener("click", onEraserClick);
 fileInput.addEventListener("change", onFileChange);
+saveBtn.addEventListener("click", onSaveClick);
