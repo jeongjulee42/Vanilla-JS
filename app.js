@@ -16,6 +16,7 @@ const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 800;
 
 ctx.lineWidth = lineWidth.value;
+ctx.lineCap = "round";
 let isPainting = false;
 let isFilling = false;
 
@@ -85,7 +86,12 @@ function onFileChange(event){
     }
 }
 function onDoubleClick(event){
-    
+    ctx.save();
+    const text = textInput.value;
+    ctx.lineWidth = 1;
+    ctx.font = "48px 'Press Start 2P'";
+    ctx.strokeText(text, event.offsetX, event.offsetY);
+    ctx.restore();
 }
 
 
